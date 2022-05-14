@@ -1,10 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import UserList from 'components/UsersList/UsersList';
+import UserList from 'components/organisms/UsersList/UsersList';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyle } from 'assets/styles/globalStyle';
+import { theme } from 'assets/styles/theme';
+import { Wrapper } from './Root.styles';
+
 const Root = () => (
-  <>
-    <UserList />
-  </>
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    <Wrapper>
+      <UserList />
+    </Wrapper>
+  </ThemeProvider>
 );
 
 export default Root;
