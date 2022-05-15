@@ -1,25 +1,26 @@
-import React, { useState } from 'react';
-import { users as usersData } from 'data/users';
-import UserListItem from 'components/molecules/UserListItem/UserListItem';
-import { Wrapper, StyledList } from './UserList.styles';
+import React from 'react';
+import PropTypes from 'prop-types';
+import UsersListItem from 'components/molecules/UsersListItem/UsersListItem';
+import { StyledList } from './UsersList.styles';
+import { UserShape } from 'types';
+import { Title } from 'components/atoms/Title/Title';
 
-const UserList = () => {
-  const [users, setUsers] = useState(usersData);
-
-  const deleteUser = (name) => {
-    const filtredUsers = users.filter((user) => user.name !== name);
-    setUsers(filtredUsers);
-  };
-
+const UsersList = ({ users, deleteUser }) => {
   return (
-    <Wrapper>
+    <>
+      <Title>Students list</Title>
       <StyledList>
         {users.map((userData) => (
-          <UserListItem key={userData.name} deleteUser={deleteUser} userData={userData} />
+          <UsersListItem deleteUser={deleteUser} key={userData.name} userData={userData} />
         ))}
       </StyledList>
-    </Wrapper>
+    </>
   );
 };
 
-export default UserList;
+UsersList.propTypes = {
+  users: PropTypes.arrayOf(PropTypes.shape(UserShape)),
+  deleteUser: PropTypes.func,
+};
+
+export default UsersList;
